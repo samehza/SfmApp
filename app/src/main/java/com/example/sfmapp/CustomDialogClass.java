@@ -28,6 +28,8 @@ public class CustomDialogClass {
             dialog.dismiss();
             Intent goTest=new Intent(activity.getApplicationContext(),TestActivity.class);
             activity.startActivity(goTest);
+            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
         }
     });
 

@@ -99,6 +99,7 @@ public class UseDeviceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent goList=new Intent(UseDeviceActivity.this,MultipleSelectionActivity.class);
                 startActivity(goList);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +107,7 @@ public class UseDeviceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent goSet=new Intent(UseDeviceActivity.this,SettingsActivity.class);
                 startActivity(goSet);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             }
         });
     }

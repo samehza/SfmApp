@@ -106,6 +106,8 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
             public void onClick(View view) {
                 Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
                 startActivity(goAC);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +115,8 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
             public void onClick(View view) {
                 Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
                 startActivity(goSet);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
             }
         });
 
