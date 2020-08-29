@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,8 @@ import com.google.firebase.ktx.Firebase;
 public class TestActivity extends AppCompatActivity {
     Button backBtn,off,on,ok,up,down;
     EditText temp;
-    String temperature;
+    TextView tempDisplay;
+    int defaultTemp=24;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +33,12 @@ public class TestActivity extends AppCompatActivity {
         on=findViewById(R.id.onTest);
         up=findViewById(R.id.upTemp);
         down=findViewById(R.id.downTemp);
+        tempDisplay=findViewById(R.id.tempAffichage);
 
-        //declare Firebase references
-        /*DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+temp.getText().toString()+"/state");
-        DatabaseReference offRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/Off/state");
-        DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/24/state");*/
+        //display default temp
+        tempDisplay.setText(String.valueOf(defaultTemp));
 
-        String testTemp=temp.getText().toString();
-        Log.d("path","Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+temp.getText().toString()+"/state");
-
-
+        //Back button
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +48,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        //RC buttons
         off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,26 +57,43 @@ public class TestActivity extends AppCompatActivity {
                 offRef.setValue("clicked");
             }
         });
-
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/24/state");
+                DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
                 onRef.setValue("unclicked");
                 onRef.setValue("clicked");
             }
         });
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+temp.getText().toString()+"/state");
                 manualTempRef.setValue("unclicked");
                 manualTempRef.setValue("clicked");
+                defaultTemp=Integer.parseInt(temp.getText().toString());
+                tempDisplay.setText(defaultTemp);
             }
         });
-
-
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                defaultTemp++;
+                DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
+                manualTempRef.setValue("unclicked");
+                manualTempRef.setValue("clicked");
+                tempDisplay.setText(defaultTemp);
+            }
+        });
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                defaultTemp--;
+                DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
+                manualTempRef.setValue("unclicked");
+                manualTempRef.setValue("clicked");
+                tempDisplay.setText(defaultTemp);
+            }
+        });
     }
 }

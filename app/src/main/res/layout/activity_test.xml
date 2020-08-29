@@ -24,9 +24,9 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_100sdp"
-        android:fontFamily="@font/seguisb"
+        android:layout_marginTop="@dimen/_50sdp"
         android:text="Télécommande"
+        android:fontFamily="@font/seguisb"
         android:textAlignment="center"
         android:textColor="#E1E1E1"
         android:textSize="@dimen/_35sdp"
@@ -35,12 +35,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tempAffichage"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seguisb"
+        android:textAlignment="center"
+        android:textColor="#E1E1E1"
+        android:textSize="@dimen/_60sdp"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_120sdp"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:layout_marginTop="@dimen/_100sdp"
+        app:layout_constraintTop_toBottomOf="@+id/tempAffichage"
         tools:layout_editor_absoluteX="0dp">
 
         <Button
