@@ -111,7 +111,7 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goSet= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
+                Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
                 startActivity(goSet);
             }
         });

@@ -4,18 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_settings"
     tools:context=".SettingsActivity">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Under construction"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/paramètres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="264dp"
+                android:fontFamily="@font/segbold"
+                android:text="Paramètres"
+                android:textAlignment="center"
+                android:textColor="#222f5c"
+                android:textSize="@dimen/_25sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundTint="#222F5C"
+                app:srcCompat="@drawable/ic_ok" />
+
+            <EditText
+                android:id="@+id/magneticSensor"
+                android:hint="Ouverture des fenêtres (minutes)"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:inputType="number"
+                android:background="@drawable/inputfield"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paramètres" />
+            <EditText
+                android:id="@+id/presenceSensor"
+                android:hint="Absence (minutes)"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:inputType="number"
+                android:background="@drawable/inputfield"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/magneticSensor" />
+            <EditText
+                android:id="@+id/generalTemp"
+                android:hint="Température générale (°C)"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:inputType="number"
+                android:background="@drawable/inputfield"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/presenceSensor"/>
+
+            <Button
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
+                android:background="@drawable/signinbtn"
+                android:fontFamily="@font/seguisb"
+                android:text="Se déconnecter"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
     <RelativeLayout
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +119,5 @@
             android:layout_width="@dimen/_105sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_alignParentEnd="true" />
-
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
