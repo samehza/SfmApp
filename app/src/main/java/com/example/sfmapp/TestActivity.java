@@ -36,7 +36,7 @@ public class TestActivity extends AppCompatActivity {
         tempDisplay=findViewById(R.id.tempAffichage);
 
         //display default temp
-        tempDisplay.setText(String.valueOf(defaultTemp));
+        tempDisplay.setText(String.valueOf(String.valueOf(defaultTemp)+"°C"));
 
         //Back button
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class TestActivity extends AppCompatActivity {
                 manualTempRef.setValue("unclicked");
                 manualTempRef.setValue("clicked");
                 defaultTemp=Integer.parseInt(temp.getText().toString());
-                tempDisplay.setText(defaultTemp);
+                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
             }
         });
         up.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class TestActivity extends AppCompatActivity {
                 DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
                 manualTempRef.setValue("unclicked");
                 manualTempRef.setValue("clicked");
-                tempDisplay.setText(defaultTemp);
+                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +92,7 @@ public class TestActivity extends AppCompatActivity {
                 DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
                 manualTempRef.setValue("unclicked");
                 manualTempRef.setValue("clicked");
-                tempDisplay.setText(defaultTemp);
+                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
             }
         });
     }
