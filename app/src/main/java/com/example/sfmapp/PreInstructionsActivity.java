@@ -35,6 +35,7 @@ Button terminer;
                 // go to next activity
                 Intent goInstruct = new Intent(PreInstructionsActivity.this,InstructionsActivity.class);
                 startActivity(goInstruct);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 

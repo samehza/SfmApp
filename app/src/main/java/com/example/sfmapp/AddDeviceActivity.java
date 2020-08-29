@@ -76,7 +76,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                 GlobalVariablesJava.instructionCounter=0;
                 Intent intent= new Intent(AddDeviceActivity.this,PreInstructionsActivity.class);
                 startActivity(intent);
-
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 Toast.makeText(AddDeviceActivity.this, "Informations validées!", Toast.LENGTH_SHORT).show();
 
             }

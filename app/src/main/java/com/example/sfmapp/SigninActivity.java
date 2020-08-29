@@ -89,11 +89,13 @@ public class SigninActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Intent intent;
                 if (snapshot.exists()) {
-                    Toast.makeText(getApplicationContext(), "Successfully signed in", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Vous êtes connectés", Toast.LENGTH_LONG).show();
                     intent = new Intent(SigninActivity.this, MultipleSelectionActivity.class);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Signed in as Installer", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Connecté comme installateur", Toast.LENGTH_LONG).show();
                     intent = new Intent(SigninActivity.this, AddDeviceActivity.class);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
                 startActivity(intent);
                 SigninActivity.this.finish();

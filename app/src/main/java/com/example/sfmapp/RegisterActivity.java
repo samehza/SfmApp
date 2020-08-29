@@ -96,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         if (task.isSuccessful()){
                                             Intent intent = new Intent(RegisterActivity.this, MultipleSelectionActivity.class);
                                             startActivity(intent);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                             RegisterActivity.this.finish();
                                         }
                                     }

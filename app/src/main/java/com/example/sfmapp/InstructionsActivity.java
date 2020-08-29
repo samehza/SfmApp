@@ -41,8 +41,6 @@ public class InstructionsActivity extends AppCompatActivity {
                    startActivity(goTest);*/
                    CustomDialogClass alert = new CustomDialogClass();
                    alert.showDialog(InstructionsActivity.this);
-
-
                }
 
 
@@ -65,7 +63,6 @@ public class InstructionsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

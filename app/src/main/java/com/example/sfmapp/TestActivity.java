@@ -46,6 +46,7 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent goBack = new Intent(TestActivity.this,AddDeviceActivity.class);
                 startActivity(goBack);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             }
         });
 
