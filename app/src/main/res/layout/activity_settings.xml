@@ -52,6 +52,7 @@
                 android:background="@drawable/inputfield"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/paramètres" />
             <EditText
@@ -80,6 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/presenceSensor"/>
 
             <Button
+                android:id="@+id/signout"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
