@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if (task.isSuccessful()){
-                                            Intent intent = new Intent(RegisterActivity.this, SelectDeviceActivity.class);
+                                            Intent intent = new Intent(RegisterActivity.this, MultipleSelectionActivity.class);
                                             startActivity(intent);
                                             RegisterActivity.this.finish();
                                         }

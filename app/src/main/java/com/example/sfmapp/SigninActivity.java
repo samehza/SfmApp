@@ -90,7 +90,7 @@ public class SigninActivity extends AppCompatActivity {
                 Intent intent;
                 if (snapshot.exists()) {
                     Toast.makeText(getApplicationContext(), "Successfully signed in", Toast.LENGTH_LONG).show();
-                    intent = new Intent(SigninActivity.this, SelectDeviceActivity.class);
+                    intent = new Intent(SigninActivity.this, MultipleSelectionActivity.class);
                 } else {
                     Toast.makeText(getApplicationContext(), "Signed in as Installer", Toast.LENGTH_LONG).show();
                     intent = new Intent(SigninActivity.this, AddDeviceActivity.class);
