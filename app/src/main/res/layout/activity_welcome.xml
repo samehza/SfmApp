@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_hi2"
+    tools:context=".WelcomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-80sdp">
+
+        <ImageView
+            android:id="@+id/illustration"
+            android:layout_width="wrap_content"
+            android:layout_height="144dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_275sdp"
+            android:layout_marginRight="@dimen/_150sdp"
+            android:src="@drawable/illustration" />
+
+        <Button
+            android:id="@+id/buttonGoReg"
+            android:layout_width="459dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_67sdp"
+            android:background="@drawable/regbtn"
+            android:fontFamily="@font/segbold"
+            android:text="S'inscrire"
+            android:textColor="#222F5C" />
+
+        <Button
+            android:id="@+id/buttonGoSign"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/buttonGoReg"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/signinbtn"
+            android:fontFamily="@font/segbold"
+            android:text="S'authentifier"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/bienvenue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:fontFamily="@font/segbold"
+            android:text="BIENVENUE"
+            android:textColor="#222F5C"
+            android:textSize="50sp" />
+        <TextView
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:id="@+id/avotreapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bienvenue"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/semibolditalic"
+            android:text="A votre application"
+            android:textColor="#222F5C"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:src="@drawable/darkrect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

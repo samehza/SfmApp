@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "745496283527",
+    "firebase_url": "https://sfmapp2020.firebaseio.com",
+    "project_id": "sfmapp2020",
+    "storage_bucket": "sfmapp2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745496283527:android:758642822fbdcebdfaeb22",
+        "android_client_info": {
+          "package_name": "com.example.sfmapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745496283527-vfkj0p2gduaqfhs9r9mp3bfn99h26fik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZTe8nBUuciiE2f5p2ykGXvO0Xupmimrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745496283527-vfkj0p2gduaqfhs9r9mp3bfn99h26fik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

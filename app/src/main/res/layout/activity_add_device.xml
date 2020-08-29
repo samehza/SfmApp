@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddDeviceActivity"
+    android:background="@drawable/bg_add_clim">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/company"
+        android:layout_marginTop="@dimen/_56sdp"
+        android:fontFamily="@font/segbold"
+        android:text="Ajouter un climatiseur"
+        android:textAlignment="center"
+        android:textColor="#222F5C"
+        android:textSize="@dimen/_25sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/company"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:alpha="0.89"
+        android:background="@drawable/inputfield"
+        android:ems="10"
+        android:hint="Entreprise"
+        android:textColorHint="#747171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+
+        android:id="@+id/refboitier"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:alpha="0.89"
+        android:layout_below="@+id/company"
+        android:background="@drawable/inputfield"
+        android:ems="10"
+        android:hint="Référence du boîtier"
+        android:textColorHint="#747171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/company" />
+
+    <EditText
+
+        android:id="@+id/refclim"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:alpha="0.89"
+        android:layout_below="@+id/emplacement"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/inputfield"
+        android:ems="10"
+        android:hint="Référence du climatiseur"
+        android:textColorHint="#747171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/refboitier" />
+
+    <EditText
+        android:id="@+id/emplacement"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/refboitier"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.89"
+        android:background="@drawable/inputfield"
+        android:ems="10"
+        android:hint="Emplacement du boîtier"
+        android:textColorHint="#747171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/refclim" />
+
+    <Button
+        android:id="@+id/valider"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@+id/refclim"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/validerlightblue"
+        android:text="valider"
+        android:textAllCaps="false"
+        android:textColor="#222F5C"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emplacement"
+        app:layout_constraintVertical_bias="0.143" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:src="@drawable/whiterect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

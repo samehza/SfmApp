@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_telecommande"
+    tools:context=".TestActivity">
+
+
+    <Button
+        android:id="@+id/backTest"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/fleche"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:fontFamily="@font/seguisb"
+        android:text="Télécommande"
+        android:textAlignment="center"
+        android:textColor="#E1E1E1"
+        android:textSize="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_120sdp"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/offTest"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:background="@drawable/offbtn"
+            android:text="OFF"
+            android:textAllCaps="false"
+            android:textColor="#FFF" />
+
+        <Button
+            android:id="@+id/onTest"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:background="@drawable/onbtn"
+            android:text="ON"
+            android:textAllCaps="false"
+            android:textColor="#FFF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+        <Button
+            android:id="@+id/downTemp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:background="@drawable/signinbtn"
+            android:text="-"
+            android:fontFamily="@font/bold"
+            android:textSize="@dimen/_25sdp"
+            android:textAllCaps="false"
+            android:textColor="#FFF" />
+
+        <Button
+            android:fontFamily="@font/bold"
+            android:textSize="@dimen/_25sdp"
+            android:id="@+id/upTemp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:background="@drawable/signinbtn"
+            android:text="+"
+            android:textAllCaps="false"
+            android:textColor="#FFF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+        >
+
+        <EditText
+            android:id="@+id/tempManual"
+            android:layout_width="@dimen/_175sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:background="@drawable/inputfield"
+            android:hint="Température en °C" />
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:id="@+id/OK_temp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/regbtn"
+            android:text="OK"
+            android:textAllCaps="false"
+            android:textColor="#222F5C" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:src="@drawable/darkrect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
