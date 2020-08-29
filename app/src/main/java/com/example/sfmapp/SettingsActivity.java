@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsActivity extends AppCompatActivity {
 Button ac,ac_list,signout;
 FloatingActionButton save;
+EditText generalTemp, magneticSensor, presenceSensor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,12 @@ FloatingActionButton save;
         ac=findViewById(R.id.ac);
         ac_list=findViewById(R.id.ac_list);
         save=findViewById(R.id.confirm);
+
+
+
+
+
+
 
         //navbar buttons
         ac_list.setOnClickListener(new View.OnClickListener() {
