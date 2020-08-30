@@ -54,14 +54,19 @@ public class SettingsActivity extends AppCompatActivity {
                 String value_temp=generalTemp.getText().toString();
                 String value_magnetic=magneticSensor.getText().toString();
                 String value_presence=presenceSensor.getText().toString();
-                GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
-                for(i=0;i<GlobalVariablesJava.selected.size();i++){
-                    DatabaseReference configRef=FirebaseDatabase.getInstance().getReference("Users/"+uID.getUid()+"/Ref/"+GlobalVariablesJava.selected.get(i)+"/config");
-                    configRef.child("magneticSensor").setValue(value_magnetic);
-                    configRef.child("presenceSensor").setValue(value_presence);
-                    configRef.child("generalTemperature").setValue(value_temp);
+                if (value_temp.isEmpty() && value_magnetic.isEmpty() && value_presence.isEmpty()){
+                    Toast.makeText(SettingsActivity.this,"Aucune modification effectuée",Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(SettingsActivity.this,"Paramètres enregistrés",Toast.LENGTH_SHORT).show();
+                else{
+                    GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
+                    for(i=0;i<GlobalVariablesJava.selected.size();i++){
+                        DatabaseReference configRef=FirebaseDatabase.getInstance().getReference("Users/"+uID.getUid()+"/Ref/"+GlobalVariablesJava.selected.get(i)+"/config");
+                        configRef.child("magneticSensor").setValue(value_magnetic);
+                        configRef.child("presenceSensor").setValue(value_presence);
+                        configRef.child("generalTemperature").setValue(value_temp);
+                    }
+                    Toast.makeText(SettingsActivity.this,"Paramètres enregistrés",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

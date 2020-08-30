@@ -25,19 +25,32 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SigninActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private Button RegFromSign, buttonSign;
+    private Button RegFromSign, buttonSign,backBtn;
     private EditText editTextTextEmailAddressSign, editTextTextPasswordSign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-
+        //asign views
+        backBtn=findViewById(R.id.backTest);
         mAuth = FirebaseAuth.getInstance();
         buttonSign = findViewById(R.id.buttonSign);
         editTextTextEmailAddressSign = findViewById(R.id.editTextTextEmailAddressSign);
         editTextTextPasswordSign = findViewById(R.id.editTextTextPasswordSign);
         RegFromSign = findViewById(R.id.RegFromSign);
+
+        //Back button
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goBack = new Intent(SigninActivity.this,WelcomeActivity.class);
+                startActivity(goBack);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            }
+        });
+
+        //main buttons
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +62,7 @@ public class SigninActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SigninActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                 SigninActivity.this.finish();
             }
         });

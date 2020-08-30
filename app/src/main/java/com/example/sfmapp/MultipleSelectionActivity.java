@@ -23,17 +23,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sfmapp.GlobalVariablesJava.selected;
+
 public class MultipleSelectionActivity extends AppCompatActivity {
-ListView l;
-int i;
-Button ac,settings;
-List<String> boitiers = new ArrayList<String>();
-FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
+    ListView l;
+    int i;
+    Button ac,settings;
+    List<String> boitiers = new ArrayList<String>();
+    FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
+    int maxIterator;
+    int minIterator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,10 +109,7 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
-                startActivity(goAC);
-                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-
+                updateMaxMin();
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
@@ -115,15 +117,81 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
             public void onClick(View view) {
                 Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
                 startActivity(goSet);
-                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-
             }
         });
-
-
     }
 
+    private void updateMaxMin() {
+        maxIterator = 0;
+        minIterator = 0;
+        getMaxTemp();
+        getMinTemp();
+        Log.d("here 0 size", String.valueOf(selected.size()));
+    }
 
+    private void getMaxTemp() {
+        DatabaseReference maxTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(maxIterator)+"/Buttons/maxTemp");
+        maxTempRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long tem = (long) dataSnapshot.getValue();
+                maxIterator++;
+                Log.d("here 1 itt", String.valueOf(maxIterator));
+                if(maxIterator==1){
+                    GlobalVariablesJava.maxTemp=(int)tem;
+                    Log.d("here 2 temp", String.valueOf(GlobalVariablesJava.maxTemp));
+
+                }
+                else if((int)tem < GlobalVariablesJava.maxTemp){
+                    GlobalVariablesJava.maxTemp=(int)tem;
+                    Log.d("here 3 temp", String.valueOf(GlobalVariablesJava.maxTemp));
+                }
+                if(maxIterator==selected.size()){
+                    if((minIterator==selected.size())){
+                        Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
+                        startActivity(goAC);
+                        MultipleSelectionActivity.this.finish();
+                    }
+                }
+                else{
+                    getMaxTemp();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+    private void getMinTemp() {
+        DatabaseReference maxTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(minIterator)+"/Buttons/minTemp");
+        maxTempRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long tem = (long) dataSnapshot.getValue();
+                minIterator++;
+                if(minIterator==1){
+                    GlobalVariablesJava.minTemp=(int)tem;
+                }
+                else if((int)tem > GlobalVariablesJava.minTemp){
+                    GlobalVariablesJava.minTemp=(int)tem;
+                }
+                if(minIterator==selected.size()){
+                    if((maxIterator==selected.size())){
+                        Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
+                        startActivity(goAC);
+                        MultipleSelectionActivity.this.finish();
+                    }
+                }
+                else{
+                    getMinTemp();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
 
 }

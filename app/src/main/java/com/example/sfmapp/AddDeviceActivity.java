@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +28,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     private String uID="";
     private EditText emp,comp,clim;
     private Button valider;
+    FloatingActionButton signout;
     List<String> companies = new ArrayList<>();
 
     @Override
@@ -33,12 +36,14 @@ public class AddDeviceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_device);
         super.onCreate(savedInstanceState);
 
+        //assign views
+        signout=findViewById(R.id.signoutInstaller);
         emp=findViewById(R.id.emplacement);
         GlobalVariablesJava.ref=findViewById(R.id.refboitier);
         comp=findViewById(R.id.company);
         valider=findViewById(R.id.valider);
         clim=findViewById(R.id.refclim);
-
+        //buttons
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +60,6 @@ public class AddDeviceActivity extends AppCompatActivity {
                 DatabaseReference refClim=FirebaseDatabase.getInstance().getReference("Actuals/refClim");
                 refClim.setValue(ac);
 
-
                 //Retrieving UID
                 DatabaseReference uidRef=FirebaseDatabase.getInstance().getReference("Companies/"+company);
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -67,49 +71,20 @@ public class AddDeviceActivity extends AppCompatActivity {
                         myPath.setValue(emplacement);
                     }
                     @Override
-
                     public void onCancelled(DatabaseError databaseError) {
-
                     }
                 });
-
                 GlobalVariablesJava.instructionCounter=0;
                 Intent intent= new Intent(AddDeviceActivity.this,PreInstructionsActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 Toast.makeText(AddDeviceActivity.this, "Informations validées!", Toast.LENGTH_SHORT).show();
-
             }
         });
-
-        DatabaseReference compRef = FirebaseDatabase.getInstance().getReference("Companies");
-        ChildEventListener childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                companies.add(dataSnapshot.getKey());
-                Log.d("myTag",dataSnapshot.getKey());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        compRef.addChildEventListener(childEventListener);
 
 
     }
 
 }
+
+

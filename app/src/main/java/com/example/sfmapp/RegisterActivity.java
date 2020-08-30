@@ -25,13 +25,14 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference refUsers;
     private DatabaseReference compRef;
     private String firebaseUserID = "";
-    private Button buttonReg,SignFromReg;
+    private Button buttonReg,SignFromReg,backBtn;
     private EditText editTextTextUserNameReg,editTextTextEmailAddressReg,editTextTextPasswordReg,editTextcompany;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        //assign views
+        backBtn=findViewById(R.id.backTest);
         mAuth = FirebaseAuth.getInstance();
         buttonReg = findViewById(R.id.buttonReg);
         SignFromReg = findViewById(R.id.SignFromReg);
@@ -39,6 +40,18 @@ public class RegisterActivity extends AppCompatActivity {
         editTextTextEmailAddressReg = findViewById(R.id.editTextTextEmailAddressReg);
         editTextTextPasswordReg = findViewById(R.id.editTextTextPasswordReg);
         editTextcompany = findViewById(R.id.editTextcompany);
+
+        //Back button
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goBack = new Intent(RegisterActivity.this,WelcomeActivity.class);
+                startActivity(goBack);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            }
+        });
+
+        //main buttons
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
                 startActivity(intent);
+                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                 RegisterActivity.this.finish();
             }
         });
