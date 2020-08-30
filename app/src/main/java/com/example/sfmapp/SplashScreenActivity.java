@@ -48,8 +48,14 @@ public class SplashScreenActivity extends AppCompatActivity {
             checkIfUserExists(firebaseUser.getUid());
         }
         else{
-            Intent goWelcome= new Intent(SplashScreenActivity.this, WelcomeActivity.class);
-            startActivity(goWelcome);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent goWelcome= new Intent(SplashScreenActivity.this, WelcomeActivity.class);
+                    startActivity(goWelcome);
+                }
+            },3000);
+
         }
     }
     private void checkIfUserExists(String userId) {

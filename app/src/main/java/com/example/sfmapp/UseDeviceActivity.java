@@ -31,10 +31,10 @@ public class UseDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_use_device);
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
         //shared pref to save the value of the current temperature, to be able to load it wheb app is destroyed and re-launched
 
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
         //assign views
         TextView tempDisplay=findViewById(R.id.tempAffichage);
@@ -62,7 +62,7 @@ public class UseDeviceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 for (i=0; i< selected.size(); i++){
-                    DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/24/state");
+                    DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/"+ generalTemp+"/state");
                     onRef.setValue("unclicked");
                     onRef.setValue("clicked");
                 }
