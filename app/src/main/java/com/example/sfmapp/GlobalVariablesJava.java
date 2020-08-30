@@ -10,5 +10,5 @@ public class GlobalVariablesJava {
     public static EditText ref;
     public  static List<String> selected = new ArrayList<String>();
     public static int generalTemp=24;
-    public static int currentTemperature=generalTemp;
+    public static int currentTemperature;
 }

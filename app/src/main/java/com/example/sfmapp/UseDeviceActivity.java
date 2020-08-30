@@ -1,6 +1,8 @@
 package com.example.sfmapp;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +16,19 @@ import static com.example.sfmapp.GlobalVariablesJava.*;
 public class UseDeviceActivity extends AppCompatActivity {
     Button off,on,ok,up,down,ac_list,settings;
     EditText temp;
-    int currentTemp;
     int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_use_device);
+
+        //shared pref to save the value of the current temperature, to be able to load it wheb app is destroyed and re-launched
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("temp", currentTemperature);
+        editor.commit();
+        int myIntValue = sp.getInt("temp", 24);
 
         //assign views
         TextView tempDisplay=findViewById(R.id.tempAffichage);
@@ -31,7 +39,8 @@ public class UseDeviceActivity extends AppCompatActivity {
         up=findViewById(R.id.tempINC);
         down=findViewById(R.id.tempDEC);
 
-        tempDisplay.setText(String.valueOf(currentTemperature)+"°C");
+        //Display temperature
+        tempDisplay.setText(String.valueOf(sp.getInt("temp", 24))+"°C");
 
         // temp control buttons
         off.setOnClickListener(new View.OnClickListener() {

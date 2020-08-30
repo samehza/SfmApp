@@ -16,11 +16,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingsActivity extends AppCompatActivity {
-int i;
-Button ac,ac_list,signout;
-FloatingActionButton save;
-EditText generalTemp, magneticSensor, presenceSensor;
-FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser();
+    int i;
+    Button ac,ac_list,signout;
+    FloatingActionButton save;
+    EditText generalTemp, magneticSensor, presenceSensor;
+    FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,17 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser();
         generalTemp=findViewById(R.id.generalTemp);
         magneticSensor=findViewById(R.id.magneticSensor);
         presenceSensor=findViewById(R.id.presenceSensor);
+
+        //signout button
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(SettingsActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+                SettingsActivity.this.finish();
+            }
+        });
 
         //save settings on "OK" floating button press
         save.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +74,6 @@ FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser();
                 overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             }
         });
-
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
