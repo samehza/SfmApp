@@ -31,6 +31,7 @@ Button terminer;
                 mPb.setVisibility(ProgressBar.VISIBLE);
                 // set Start to on in Firebase
                 DatabaseReference startRef = FirebaseDatabase.getInstance().getReference("Actuals/start");
+                startRef.setValue("off");
                 startRef.setValue("on");
                 // go to next activity
                 Intent goInstruct = new Intent(PreInstructionsActivity.this,InstructionsActivity.class);

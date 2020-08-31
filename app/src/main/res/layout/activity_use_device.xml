@@ -109,6 +109,9 @@
         >
 
         <EditText
+            android:inputType="number"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/temp_ok"
             android:id="@+id/tempManual_EditText"
             android:layout_width="@dimen/_175sdp"
             android:layout_height="@dimen/_40sdp"

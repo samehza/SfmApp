@@ -30,6 +30,8 @@
         android:alpha="0.89"
         android:background="@drawable/inputfield"
         android:ems="10"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/refboitier"
         android:hint="Entreprise"
         android:textColorHint="#747171"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +48,8 @@
         android:layout_below="@+id/company"
         android:background="@drawable/inputfield"
         android:ems="10"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/refclim"
         android:hint="Référence du boîtier"
         android:textColorHint="#747171"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +57,8 @@
         app:layout_constraintTop_toBottomOf="@+id/company" />
 
     <EditText
-
+        android:singleLine="true"
+        android:nextFocusDown="@+id/emplacement"
         android:id="@+id/refclim"
         android:layout_width="@dimen/_220sdp"
         android:layout_height="@dimen/_40sdp"
@@ -70,6 +75,8 @@
         app:layout_constraintTop_toBottomOf="@+id/refboitier" />
 
     <EditText
+        android:singleLine="true"
+        android:nextFocusDown="@+id/valider"
         android:id="@+id/emplacement"
         android:layout_width="@dimen/_220sdp"
         android:layout_height="@dimen/_40sdp"

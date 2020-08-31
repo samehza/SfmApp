@@ -69,6 +69,8 @@ public class UseDeviceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 generalTemp = sharedPrefGeneral.getInt(getString(R.string.generalTemp_key),26);
+                currentTemperature=generalTemp;
+                tempDisplay.setText(currentTemperature+"°C");
                 for (i=0; i< selected.size(); i++){
                     DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/"+ generalTemp+"/state");
                     onRef.setValue("unclicked");
@@ -82,13 +84,13 @@ public class UseDeviceActivity extends AppCompatActivity {
                 currentTemperature=Integer.parseInt(temp.getText().toString());
                 if(currentTemperature > GlobalVariablesJava.maxTemp) {
                     currentTemperature=GlobalVariablesJava.maxTemp;
-                    Toast.makeText(getApplicationContext(), "Vous avez dépasser la température maximale", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Vous avez dépassé la température maximale", Toast.LENGTH_LONG).show();
                     temp.setText(String.valueOf(currentTemperature));
                     tempDisplay.setText(currentTemperature+"°C");
                 }
                 if(currentTemperature<GlobalVariablesJava.minTemp){
                     currentTemperature=GlobalVariablesJava.minTemp;
-                    Toast.makeText(getApplicationContext(), "Vous avez dépasser la température minimale", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Vous avez dépassé la température minimale", Toast.LENGTH_LONG).show();
                     temp.setText(String.valueOf(currentTemperature));
                     tempDisplay.setText(currentTemperature+"°C");
                 }

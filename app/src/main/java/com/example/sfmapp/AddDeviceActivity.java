@@ -52,8 +52,8 @@ public class AddDeviceActivity extends AppCompatActivity {
                 String reference=GlobalVariablesJava.ref.getText().toString();
                 String company = comp.getText().toString();
                 String ac=clim.getText().toString();
+                GlobalVariablesJava.currentAcRefInstaller=ac;
                 //variables Firebase references
-
                 DatabaseReference refRef= FirebaseDatabase.getInstance().getReference("Actuals/actualRef");
                 refRef.setValue(reference);
                 //Actual clim ref

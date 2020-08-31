@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalVariablesJava {
+    public static String currentAcRefInstaller;
     public static int instructionCounter=0;
     public static EditText ref;
     public  static List<String> selected = new ArrayList<String>();

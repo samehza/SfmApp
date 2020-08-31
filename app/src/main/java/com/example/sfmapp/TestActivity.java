@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.ktx.Firebase;
+
+import static com.example.sfmapp.GlobalVariablesJava.currentTemperature;
 
 public class TestActivity extends AppCompatActivity {
     Button backBtn,off,on,ok,up,down;
@@ -68,31 +71,45 @@ public class TestActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+temp.getText().toString()+"/state");
+                defaultTemp=Integer.parseInt(temp.getText().toString());
+                if(defaultTemp > GlobalVariablesJava.maxTemp) {
+                    defaultTemp=GlobalVariablesJava.maxTemp;
+                    Toast.makeText(getApplicationContext(), "Vous avez dépassé la température maximale", Toast.LENGTH_LONG).show();
+                    temp.setText(String.valueOf(defaultTemp));
+                }
+                if(defaultTemp<GlobalVariablesJava.minTemp){
+                    defaultTemp=GlobalVariablesJava.minTemp;
+                    Toast.makeText(getApplicationContext(), "Vous avez dépassé la température minimale", Toast.LENGTH_LONG).show();
+                    temp.setText(String.valueOf(defaultTemp));
+                }
+                DatabaseReference manualTempRef = FirebaseDatabase.getInstance().getReference("Reference/" + GlobalVariablesJava.ref.getText().toString() + "/Buttons/" + defaultTemp + "/state");
                 manualTempRef.setValue("unclicked");
                 manualTempRef.setValue("clicked");
-                defaultTemp=Integer.parseInt(temp.getText().toString());
-                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
+                tempDisplay.setText(String.valueOf(defaultTemp) + "°C");
             }
         });
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                defaultTemp++;
-                DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
-                manualTempRef.setValue("unclicked");
-                manualTempRef.setValue("clicked");
-                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
+                if(defaultTemp < GlobalVariablesJava.maxTemp) {
+                    defaultTemp++;
+                    DatabaseReference manualTempRef = FirebaseDatabase.getInstance().getReference("Reference/" + GlobalVariablesJava.ref.getText().toString() + "/Buttons/" + String.valueOf(defaultTemp) + "/state");
+                    manualTempRef.setValue("unclicked");
+                    manualTempRef.setValue("clicked");
+                    tempDisplay.setText(String.valueOf(defaultTemp) + "°C");
+                }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                defaultTemp--;
-                DatabaseReference manualTempRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
-                manualTempRef.setValue("unclicked");
-                manualTempRef.setValue("clicked");
-                tempDisplay.setText(String.valueOf(defaultTemp)+"°C");
+                if (defaultTemp > GlobalVariablesJava.minTemp) {
+                    defaultTemp--;
+                    DatabaseReference manualTempRef = FirebaseDatabase.getInstance().getReference("Reference/" + GlobalVariablesJava.ref.getText().toString() + "/Buttons/" + String.valueOf(defaultTemp) + "/state");
+                    manualTempRef.setValue("unclicked");
+                    manualTempRef.setValue("clicked");
+                    tempDisplay.setText(String.valueOf(defaultTemp) + "°C");
+                }
             }
         });
     }
