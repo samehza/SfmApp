@@ -67,7 +67,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot snapshot) {
                         uID = (String) snapshot.getValue();
                         Log.d("user is", uID);
-                        DatabaseReference myPath=FirebaseDatabase.getInstance().getReference("Users/"+uID+"/Ref/"+reference);
+                        DatabaseReference myPath=FirebaseDatabase.getInstance().getReference("Users/"+uID+"/Ref/"+reference+"/emplacement");
                         myPath.setValue(emplacement);
                     }
                     @Override
@@ -82,7 +82,16 @@ public class AddDeviceActivity extends AppCompatActivity {
             }
         });
 
-
+        //signout
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(AddDeviceActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
     }
 
 }

@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <RelativeLayout
-        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_55sdp"
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
@@ -104,7 +104,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
         >
 

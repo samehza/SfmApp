@@ -24,6 +24,7 @@ import static com.example.sfmapp.GlobalVariablesJava.*;
 public class UseDeviceActivity extends AppCompatActivity {
     Button off,on,ok,up,down,ac_list,settings;
     SharedPreferences sharedPref ;
+    SharedPreferences sharedPrefGeneral ;
     EditText temp;
     int i;
 
@@ -31,10 +32,15 @@ public class UseDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_use_device);
-        //shared pref to save the value of the current temperature, to be able to load it wheb app is destroyed and re-launched
 
+        //shared pref to save the value of the current temperature, to be able to load it when app is destroyed and re-launched
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+        //to read the general temperature
+        sharedPrefGeneral = this.getSharedPreferences("SettingPref",Context.MODE_PRIVATE);
+
+
+
 
         //assign views
         TextView tempDisplay=findViewById(R.id.tempAffichage);
@@ -44,6 +50,7 @@ public class UseDeviceActivity extends AppCompatActivity {
         on=findViewById(R.id.on);
         up=findViewById(R.id.tempINC);
         down=findViewById(R.id.tempDEC);
+
         currentTemperature = sharedPref.getInt(getString(R.string.saved_currentTemperature), 24);
         //Display temperature
         tempDisplay.setText(String.valueOf(currentTemperature)+"°C");
@@ -61,6 +68,7 @@ public class UseDeviceActivity extends AppCompatActivity {
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                generalTemp = sharedPrefGeneral.getInt(getString(R.string.generalTemp_key),26);
                 for (i=0; i< selected.size(); i++){
                     DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/"+ generalTemp+"/state");
                     onRef.setValue("unclicked");

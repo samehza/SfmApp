@@ -76,7 +76,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         };
         userNameRef.addListenerForSingleValueEvent(eventListener);

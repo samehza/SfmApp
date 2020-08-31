@@ -36,6 +36,7 @@ public class MultipleSelectionActivity extends AppCompatActivity {
     int i;
     Button ac,settings;
     List<String> boitiers = new ArrayList<String>();
+    List<String> emplacement = new ArrayList<String>();
     FirebaseUser uID = FirebaseAuth.getInstance().getCurrentUser() ;
     int maxIterator;
     int minIterator;
@@ -46,12 +47,13 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         l=findViewById(R.id.list);
         CustomProgress alert = new CustomProgress();
         alert.showDialog(MultipleSelectionActivity.this);
+
+        //confirm button
         findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for(i=0;i<boitiers.size();i++)
                 {
-                    Log.d("size", String.valueOf(boitiers.size()));
                     //iterating through the ArrayList items to detect if they are checked, if they are, "true" is assigned the value of "selected" variable in firebase
                     if (l.isItemChecked(i))
                     {
@@ -60,7 +62,9 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                         selectRef.setValue("true");
                     }
                 }
-                Toast.makeText(MultipleSelectionActivity.this,"Boitiers séletionnés!",Toast.LENGTH_SHORT).show();
+                if (selected.size()>0)
+                    Toast.makeText(MultipleSelectionActivity.this,"Boitiers séletionnés!",Toast.LENGTH_SHORT).show();
+                else Toast.makeText(MultipleSelectionActivity.this,"Aucun boîtier sélectionné!",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -70,9 +74,11 @@ public class MultipleSelectionActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 boitiers.add(dataSnapshot.getKey());
+                if(dataSnapshot.child("emplacement").getValue()!=null)
+                    emplacement.add(String.valueOf(dataSnapshot.child("emplacement").getValue()));
+                else Log.d("mochkla","hello");
                 //refresh ListView
                 l.invalidateViews();
-
             }
 
             @Override
@@ -99,7 +105,7 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.select_dialog_multichoice,
-                boitiers );
+                emplacement );
         l.setAdapter(arrayAdapter);
 
         //navbar
@@ -109,14 +115,20 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateMaxMin();
+                if (selected.size()>0)
+                    updateMaxMin();
+                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_LONG).show();
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
-                startActivity(goSet);
+                if (selected.size()>0){
+                    Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
+                    startActivity(goSet);
+                }
+                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -157,7 +169,6 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                     getMaxTemp();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -192,6 +203,4 @@ public class MultipleSelectionActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

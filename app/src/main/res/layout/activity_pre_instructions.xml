@@ -28,6 +28,7 @@
         android:fontFamily="@font/seguisb"
         android:layout_marginLeft="@dimen/_20sdp"
         android:id="@+id/textView2"
+        android:layout_marginRight="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_40sdp"
