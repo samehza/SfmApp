@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/regbtn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+    <TextView
+        android:id="@+id/emplacementTemp"
+        android:textSize="@dimen/_25sdp"
+        android:textColor="#222F5C"
+        android:fontFamily="@font/segbold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+    <TextView
+        android:id="@+id/realTemp"
+        android:textSize="@dimen/_70sdp"
+        android:fontFamily="@font/seguisb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/_15sdp">
+
+       <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/previous"
+           android:layout_width="@dimen/_50sdp"
+           android:layout_height="@dimen/_50sdp"
+           android:layout_alignParentStart="true"
+           android:layout_marginStart="0dp"
+           android:background="@drawable/signinbtn"
+           android:fontFamily="@font/segbold"
+           android:textColor="#FFF"
+           app:backgroundTint="#222F5C"
+           app:srcCompat="@drawable/ic_previous" />
+
+       <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/next"
+           android:layout_width="@dimen/_50sdp"
+           android:layout_height="@dimen/_50sdp"
+           android:layout_alignParentEnd="true"
+           android:background="@drawable/signinbtn"
+           android:fontFamily="@font/segbold"
+           android:textColor="#FFF"
+           app:srcCompat="@drawable/ic_next"
+           app:backgroundTint="#222F5C" />
+
+       <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/close"
+           android:layout_width="@dimen/_50sdp"
+           android:layout_height="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+           android:background="@drawable/signinbtn"
+           android:fontFamily="@font/segbold"
+           android:textColor="#FFF"
+           app:srcCompat="@drawable/ic_close"
+           app:backgroundTint="#F6A7A7"/>
+
+   </RelativeLayout>
+</LinearLayout>

@@ -1,19 +1,16 @@
 package com.example.sfmapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,14 +21,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.example.sfmapp.GlobalVariablesJava.selected;
 
 public class MultipleSelectionActivity extends AppCompatActivity {
+    //progress bar until selected items are saved to Firebase before going to the "use device activity"
+    CustomLoad load = new CustomLoad();
     ListView l;
     int i;
     Button ac,settings;
@@ -45,6 +42,8 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_selection);
         l=findViewById(R.id.list);
+
+        //dialog  for progress bar loading the elements of the list
         CustomProgress alert = new CustomProgress();
         alert.showDialog(MultipleSelectionActivity.this);
 
@@ -57,9 +56,8 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                     //iterating through the ArrayList items to detect if they are checked, if they are, "true" is assigned the value of "selected" variable in firebase
                     if (l.isItemChecked(i))
                     {
+                        GlobalVariablesJava.emplacementSelected.add(emplacement.get(i));
                         GlobalVariablesJava.selected.add(boitiers.get(i));
-                        DatabaseReference selectRef = FirebaseDatabase.getInstance().getReference("Reference/"+boitiers.get(i)+"/selected");
-                        selectRef.setValue("true");
                     }
                 }
                 if (selected.size()>0)
@@ -76,9 +74,10 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                 boitiers.add(dataSnapshot.getKey());
                 if(dataSnapshot.child("emplacement").getValue()!=null)
                     emplacement.add(String.valueOf(dataSnapshot.child("emplacement").getValue()));
-                else Log.d("mochkla","hello");
+
                 //refresh ListView
                 l.invalidateViews();
+                alert.hideDialog();
             }
 
             @Override
@@ -99,7 +98,20 @@ public class MultipleSelectionActivity extends AppCompatActivity {
             }
         };
         boitierRef.addChildEventListener(childEventListener);
+        boitierRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getChildrenCount() == 0){
+                    // db has no children
+                    alert.hideDialog();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //setting the adapter to display the items of the list "boitiers"
         l.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -111,24 +123,20 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         //navbar
         ac=findViewById(R.id.ac);
         settings=findViewById(R.id.settings);
-
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                load.showDialog(MultipleSelectionActivity.this);
                 if (selected.size()>0)
                     updateMaxMin();
-                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_LONG).show();
+                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_SHORT).show();
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selected.size()>0){
-                    Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
-                    startActivity(goSet);
-                }
-                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_LONG).show();
-
+                Intent goSet= new Intent(MultipleSelectionActivity.this,SettingsActivity.class);
+                startActivity(goSet);
             }
         });
     }
@@ -146,7 +154,9 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         maxTempRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                long tem = (long) dataSnapshot.getValue();
+                long tem=0;
+                if (dataSnapshot!=null)
+                    tem = (long) dataSnapshot.getValue();
                 maxIterator++;
                 Log.d("here 1 itt", String.valueOf(maxIterator));
                 if(maxIterator==1){
@@ -160,6 +170,7 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                 }
                 if(maxIterator==selected.size()){
                     if((minIterator==selected.size())){
+                        load.hideDialog();
                         Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
                         startActivity(goAC);
                         MultipleSelectionActivity.this.finish();
@@ -189,6 +200,7 @@ public class MultipleSelectionActivity extends AppCompatActivity {
                 }
                 if(minIterator==selected.size()){
                     if((maxIterator==selected.size())){
+                        load.hideDialog();
                         Intent goAC= new Intent(MultipleSelectionActivity.this,UseDeviceActivity.class);
                         startActivity(goAC);
                         MultipleSelectionActivity.this.finish();

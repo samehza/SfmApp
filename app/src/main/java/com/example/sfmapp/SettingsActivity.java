@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.sfmapp.GlobalVariablesJava.currentTemperature;
+import static com.example.sfmapp.GlobalVariablesJava.selected;
 
 public class SettingsActivity extends AppCompatActivity {
     int i;
@@ -63,27 +64,30 @@ public class SettingsActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String value_temp=generalTemp.getText().toString();
-                String value_magnetic=magneticSensor.getText().toString();
-                String value_presence=presenceSensor.getText().toString();
-                if (value_temp.isEmpty() && value_magnetic.isEmpty() && value_presence.isEmpty()){
-                    Toast.makeText(SettingsActivity.this,"Aucune modification effectuée",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
-                    editor.putInt(getString(R.string.generalTemp_key), GlobalVariablesJava.generalTemp);
-                    editor.commit();
-                    for(i=0;i<GlobalVariablesJava.selected.size();i++){
-                        DatabaseReference configRef=FirebaseDatabase.getInstance().getReference("Users/"+uID.getUid()+"/Ref/"+GlobalVariablesJava.selected.get(i)+"/config");
-                        if (!value_magnetic.isEmpty())
-                            configRef.child("magneticSensor").setValue(value_magnetic);
-                        if (!value_presence.isEmpty())
-                            configRef.child("presenceSensor").setValue(value_presence);
-                        if (!value_temp.isEmpty())
-                            configRef.child("generalTemperature").setValue(value_temp);
+                if (selected.size()>0) {
+                    String value_temp=generalTemp.getText().toString();
+                    String value_magnetic=magneticSensor.getText().toString();
+                    String value_presence=presenceSensor.getText().toString();
+                    if (value_temp.isEmpty() && value_magnetic.isEmpty() && value_presence.isEmpty()){
+                        Toast.makeText(SettingsActivity.this,"Aucune modification effectuée",Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(SettingsActivity.this,"Paramètres enregistrés",Toast.LENGTH_SHORT).show();
+                    else{
+                        GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
+                        editor.putInt(getString(R.string.generalTemp_key), GlobalVariablesJava.generalTemp);
+                        editor.commit();
+                        for(i=0;i<GlobalVariablesJava.selected.size();i++){
+                            DatabaseReference configRef=FirebaseDatabase.getInstance().getReference("/Reference/"+GlobalVariablesJava.selected.get(i)+"/Buttons/config");
+                            if (!value_magnetic.isEmpty())
+                                configRef.child("magneticSensor").setValue(value_magnetic);
+                            if (!value_presence.isEmpty())
+                                configRef.child("presenceSensor").setValue(value_presence);
+                            if (!value_temp.isEmpty())
+                                configRef.child("generalTemperature").setValue(value_temp);
+                        }
+                        Toast.makeText(SettingsActivity.this,"Paramètres enregistrés",Toast.LENGTH_SHORT).show();
+                    }
                 }
+                else Toast.makeText(SettingsActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,9 +103,12 @@ public class SettingsActivity extends AppCompatActivity {
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goAC=new Intent(SettingsActivity.this,UseDeviceActivity.class);
-                startActivity(goAC);
-                overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                if (selected.size()>0) {
+                    Intent goAC = new Intent(SettingsActivity.this, UseDeviceActivity.class);
+                    startActivity(goAC);
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                }
+                else Toast.makeText(SettingsActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,12 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.example.sfmapp.GlobalVariablesJava.*;
 public class UseDeviceActivity extends AppCompatActivity {
-    Button off,on,ok,up,down,ac_list,settings;
+    Button off,on,ok,up,down,ac_list,settings,checkTemp;
     SharedPreferences sharedPref ;
     SharedPreferences sharedPrefGeneral ;
     EditText temp;
-    int i;
-
+    int i,iterator;
+    loadTemp alert = new loadTemp();
+    TempDialog tempDiag = new TempDialog();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +41,6 @@ public class UseDeviceActivity extends AppCompatActivity {
         //to read the general temperature
         sharedPrefGeneral = this.getSharedPreferences("SettingPref",Context.MODE_PRIVATE);
 
-
-
-
         //assign views
         TextView tempDisplay=findViewById(R.id.tempAffichage);
         temp=findViewById(R.id.tempManual_EditText);
@@ -50,6 +49,7 @@ public class UseDeviceActivity extends AppCompatActivity {
         on=findViewById(R.id.on);
         up=findViewById(R.id.tempINC);
         down=findViewById(R.id.tempDEC);
+        checkTemp=findViewById(R.id.checkTemp);
 
         currentTemperature = sharedPref.getInt(getString(R.string.saved_currentTemperature), 24);
         //Display temperature
@@ -136,6 +136,15 @@ public class UseDeviceActivity extends AppCompatActivity {
                 }
             }
         });
+        checkTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempList.clear();
+                iterator=0;
+                alert.showDialog(UseDeviceActivity.this);
+                getTemp();
+            }
+        });
 
         //navbar buttons
         ac_list=findViewById(R.id.ac_list);
@@ -155,6 +164,36 @@ public class UseDeviceActivity extends AppCompatActivity {
                 Intent goSet=new Intent(UseDeviceActivity.this,SettingsActivity.class);
                 startActivity(goSet);
                 overridePendingTransition( android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            }
+        });
+    }
+    //getTemp() is a function that reads all temperatures from Firebase and adds them to the list tempList, when it is full, a dialog is shown
+    private void getTemp() {
+        DatabaseReference tempRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(iterator)+"/Buttons/getTemp");
+        tempRef.child("state").setValue("unclicked");
+        tempRef.child("state").setValue("clicked");
+        tempRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String state=snapshot.child("state").getValue().toString();
+                Log.d("statess",state);
+                if(state.equals("unclicked")){
+                    tempList.add(snapshot.child("temp").getValue().toString());
+                    iterator++;
+                    if(iterator==selected.size()){
+                        alert.hideDialog();
+                        tempDiag.showDialog(UseDeviceActivity.this);
+                    }
+                    else{
+                        getTemp();
+                    }
+                    tempRef.removeEventListener(this);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

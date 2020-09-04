@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String firebaseUserID = "";
     private Button buttonReg,SignFromReg,backBtn;
     private EditText editTextTextUserNameReg,editTextTextEmailAddressReg,editTextTextPasswordReg,editTextcompany;
+    CustomLoad alert = new CustomLoad();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,18 +76,19 @@ public class RegisterActivity extends AppCompatActivity {
         String password = editTextTextPasswordReg.getText().toString();
         String company = editTextcompany.getText().toString();
         if (userName.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Nom d'utilisateur ne peut pas être vide", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Nom d'utilisateur ne peut pas être vide", Toast.LENGTH_SHORT).show();
         }
         else if (emailAddress.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Adresse Email ne peut pas être vide", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Adresse Email ne peut pas être vide", Toast.LENGTH_SHORT).show();
         }
         else if (password.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Mot de passe ne peut pas être vide", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Mot de passe ne peut pas être vide", Toast.LENGTH_SHORT).show();
         }
         else if (company.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Entreprise ne peut pas être vide", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Entreprise ne peut pas être vide", Toast.LENGTH_SHORT).show();
         }
         else{
+            alert.showDialog(RegisterActivity.this);
             mAuth.createUserWithEmailAndPassword(emailAddress, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -109,16 +111,18 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task task) {
                                         if (task.isSuccessful()){
                                             Intent intent = new Intent(RegisterActivity.this, MultipleSelectionActivity.class);
+                                            alert.hideDialog();
                                             startActivity(intent);
                                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                             RegisterActivity.this.finish();
                                         }
+                                        else alert.hideDialog();
                                     }
                                 });
-
                             }
                             else {
                                 // If sign in fails, display a message to the user.
+                                alert.hideDialog();
                                 Toast.makeText(getApplicationContext(), "Error creating account:\n" + task.getException().toString(), Toast.LENGTH_LONG).show();
                             }
                         }

@@ -1,9 +1,7 @@
 package com.example.sfmapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,11 +25,14 @@ public class SigninActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button RegFromSign, buttonSign,backBtn;
     private EditText editTextTextEmailAddressSign, editTextTextPasswordSign;
+    CustomLoad alert = new CustomLoad();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+
         //asign views
         backBtn=findViewById(R.id.backTest);
         mAuth = FirebaseAuth.getInstance();
@@ -53,8 +54,7 @@ public class SigninActivity extends AppCompatActivity {
         //main buttons
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                loginUser();
+            public void onClick(View view) { loginUser();
             }
         });
         RegFromSign.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +72,11 @@ public class SigninActivity extends AppCompatActivity {
         String emailAddress = editTextTextEmailAddressSign.getText().toString();
         String password = editTextTextPasswordSign.getText().toString();
         if (emailAddress.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Email Address can't be empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Email Address can't be empty", Toast.LENGTH_SHORT).show();
         } else if (password.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Password can't be empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Password can't be empty", Toast.LENGTH_SHORT).show();
         } else {
+            alert.showDialog(SigninActivity.this);
             mAuth.signInWithEmailAndPassword(emailAddress, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -87,6 +88,7 @@ public class SigninActivity extends AppCompatActivity {
                                     checkIfUserExists(user.getUid());
                                 }
                             } else {
+                                alert.hideDialog();
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(getApplicationContext(), "Error Logging in:\n" + task.getException().toString(), Toast.LENGTH_LONG).show();
                             }
@@ -103,14 +105,15 @@ public class SigninActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Intent intent;
                 if (snapshot.exists()) {
-                    Toast.makeText(getApplicationContext(), "Vous êtes connectés", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Vous êtes connectés", Toast.LENGTH_SHORT).show();
                     intent = new Intent(SigninActivity.this, MultipleSelectionActivity.class);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Connecté comme installateur", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Connecté comme installateur", Toast.LENGTH_SHORT).show();
                     intent = new Intent(SigninActivity.this, AddDeviceActivity.class);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
+                alert.hideDialog();
                 startActivity(intent);
                 SigninActivity.this.finish();
             }

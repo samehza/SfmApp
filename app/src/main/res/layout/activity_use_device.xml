@@ -88,6 +88,18 @@
             android:textColor="#FFF" />
 
         <Button
+            android:id="@+id/checkTemp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/signinbtn"
+            android:fontFamily="@font/bold"
+            android:text="°C"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textSize="@dimen/_15sdp" />
+
+        <Button
             android:fontFamily="@font/bold"
             android:textSize="@dimen/_25sdp"
             android:id="@+id/tempINC"
