@@ -197,7 +197,7 @@ public class MultipleSelectionActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long tem = (long) dataSnapshot.getValue();
                 minIterator++;
-                if(minIterator==1){
+                if(minIterator== 1){
                     GlobalVariablesJava.minTemp=(int)tem;
                 }
                 else if((int)tem > GlobalVariablesJava.minTemp){
