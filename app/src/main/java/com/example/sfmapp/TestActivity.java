@@ -63,7 +63,7 @@ public class TestActivity extends AppCompatActivity {
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/"+String.valueOf(defaultTemp)+"/state");
+                DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+GlobalVariablesJava.ref.getText().toString()+"/Buttons/On");
                 onRef.setValue("unclicked");
                 onRef.setValue("clicked");
             }

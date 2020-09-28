@@ -72,7 +72,7 @@ public class UseDeviceActivity extends AppCompatActivity {
                 currentTemperature=generalTemp;
                 tempDisplay.setText(currentTemperature+"°C");
                 for (i=0; i< selected.size(); i++){
-                    DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/"+ generalTemp+"/state");
+                    DatabaseReference onRef= FirebaseDatabase.getInstance().getReference("Reference/"+ selected.get(i)+"/Buttons/On");
                     onRef.setValue("unclicked");
                     onRef.setValue("clicked");
                 }
