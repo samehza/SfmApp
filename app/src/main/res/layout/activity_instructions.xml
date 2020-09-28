@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".InstructionsActivity"
     android:background="@drawable/bg_add_clim">
+    <TextView
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:id="@+id/instruction0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/seguisb"
+        android:text="Appuyez sur le bouton OFF de la télécommande du climatiseur"
+        android:textColor="#484848"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@+id/instruction3"
+        tools:layout_editor_absoluteX="0dp" />
+
 
     <TextView
         android:id="@+id/instruction"
@@ -29,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
         android:fontFamily="@font/seguisb"
-        android:text="Incrémenter lentement la température jusqu'à atteindre la température maximale "
+        android:text="Appuyer sur le bouton ON de la télécommande du climatiseur "
         android:textColor="#484848"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@+id/instruction"
@@ -43,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/seguisb"
-        android:text="Décrémenter la température lentement jusqu'à atteindre la température minimale"
+        android:text="Incrémenter lentement la température jusqu'à atteindre la température maximale "
         android:textColor="#484848"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@+id/instruction1"
@@ -57,20 +71,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/seguisb"
-        android:text="Appuyez sur le bouton OFF de la télécommande du climatiseur"
+        android:text="Décrémenter la température lentement jusqu'à atteindre la température minimale"
         android:textColor="#484848"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@+id/instruction2"
         tools:layout_editor_absoluteX="0dp" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:alpha=".7"
         android:id="@+id/gifImageView"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_60sdp"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:alpha=".7"
         android:src="@drawable/ac_animated"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instruction3" />
 
