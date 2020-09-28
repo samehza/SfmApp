@@ -126,10 +126,15 @@ public class MultipleSelectionActivity extends AppCompatActivity {
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                load.showDialog(MultipleSelectionActivity.this);
-                if (selected.size()>0)
-                    updateMaxMin();
-                else Toast.makeText(MultipleSelectionActivity.this,"Sélectionnez l'emplacement puis appuyez sur OK",Toast.LENGTH_SHORT).show();
+
+                    if (selected.size() > 0){
+                        load.showDialog(MultipleSelectionActivity.this);
+                        updateMaxMin();
+                    }
+
+                    else
+                        Toast.makeText(MultipleSelectionActivity.this, "Sélectionnez l'emplacement puis appuyez sur OK", Toast.LENGTH_SHORT).show();
+
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {
