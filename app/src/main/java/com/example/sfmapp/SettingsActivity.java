@@ -72,7 +72,6 @@ public class SettingsActivity extends AppCompatActivity {
                         Toast.makeText(SettingsActivity.this,"Aucune modification effectuée",Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
                         editor.putInt(getString(R.string.generalTemp_key), GlobalVariablesJava.generalTemp);
                         editor.commit();
                         for(i=0;i<GlobalVariablesJava.selected.size();i++){
@@ -81,8 +80,10 @@ public class SettingsActivity extends AppCompatActivity {
                                 configRef.child("magneticSensor").setValue(value_magnetic);
                             if (!value_presence.isEmpty())
                                 configRef.child("presenceSensor").setValue(value_presence);
-                            if (!value_temp.isEmpty())
+                            if (!value_temp.isEmpty()){
+                                GlobalVariablesJava.generalTemp=Integer.parseInt(value_temp);
                                 configRef.child("generalTemperature").setValue(value_temp);
+                            }
                         }
                         Toast.makeText(SettingsActivity.this,"Paramètres enregistrés",Toast.LENGTH_SHORT).show();
                     }

@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_40sdp"
-        android:text="Appliquez au climatiseur les configurations suivantes:\n- Appuyez sur ON\n- Température minimale"
+        android:text="Appliquez au climatiseur les configurations suivantes:\n- Appuyez sur ON\n- Appliquer la température 26°C\n- Appuyez sur OFF"
         app:layout_constraintTop_toBottomOf="@+id/pre_instructions"
         tools:layout_editor_absoluteX="0dp" />
 
